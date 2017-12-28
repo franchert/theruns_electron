@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <script type="text/javascript" src="./global.js"></script>
   </head>
   <body>
     <script>
       // You can also require other files to run in this process
       require('./renderer.js')
     </script>
+    <button id="refresh-button" onclick="refreshData(1)">Refresh all data</button>
   </body>
 </html>
