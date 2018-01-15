@@ -14,20 +14,18 @@ function refreshData(pag) {
     // },15000)
 
     strava.athlete.listActivities({page: pag}, function (err, payload, limits) {
+        //console.log(payload);
         if (!err) {
             if (payload.length > 0) {
                 for (var i = 0; i < payload.length; i++) {
-                    db.find({id: payload[i]['id']}, function (err, docs) {
-                        if (docs.length === 0) {
-                            data = {
-                                id: payload[i]['id'],
-                                date: payload[i]['start_date_local'],
-                                distance: payload[i]['distance'] * 0.000621371192,
-                                time: payload[i]['elapsed_time']
-                            };
-                            db.insert(data, function (err, newDoc) {
-                            });
-                        }
+                    data = {
+                        id: payload[i]['id'],
+                        date: payload[i]['start_date_local'],
+                        distance: payload[i]['distance'] * 0.000621371192,
+                        time: payload[i]['elapsed_time'],
+                        score: scorer(payload[i]['distance'], payload[i]['elapsed_time'])
+                    };
+                    db.update({id: payload[i]['id']}, data, {upsert: true}, function (err, docs) {
                     });
                 }
                 var nextPage = pag + 1;
@@ -44,4 +42,10 @@ function refreshData(pag) {
 
 function openLink(url){
     shell.openExternal(url);
+}
+
+function scorer(distance, time) {
+    const pace = (time / 60) / distance;
+    //return (Math.round(((400 * Math.pow(pace, 0.2)) - distance) * 100) / 100) + 60;
+    return Math.pow(distance, 1.2) * pace
 }
