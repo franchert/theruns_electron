@@ -2,7 +2,7 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-db.find({}).sort({score:  1}).exec(function (err, docs) {
+db.find({}).sort({score: -1}).exec(function (err, docs) {
     let keys = Object.keys(docs);
     let runs = {};
     keys.map((x) => {
@@ -11,7 +11,7 @@ db.find({}).sort({score:  1}).exec(function (err, docs) {
         run.date = docs[x].date;
         run.distance = docs[x].distance;
         run.time = docs[x].time;
-        run.score = scorer(run.distance, run.time);
+        run.score = docs[x].score;
         runs[x] = run;
         let container = document.getElementById('runContainer');
         let newRun = document.createElement('li');
@@ -23,9 +23,9 @@ db.find({}).sort({score:  1}).exec(function (err, docs) {
 
 function createRun(runs) {
     return `<a onclick="openLink('https://www.strava.com/activities/${runs.id}')">
+        <span>${runs.score}</span>
         <span>${runs.date}</span>
         <span>${runs.distance}</span>
         <span>${runs.time}</span>
-        <span>${scorer(runs.distance, runs.time)}</span>
     </a>`;
 };
