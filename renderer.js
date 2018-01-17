@@ -5,6 +5,11 @@
 const moment = require('moment');
 db.find({}).sort({score: -1}).exec(function (err, docs) {
     mapData('byScore', docs);
+    let keys = Object.keys(docs);
+    keys.map((x) => {
+        const val = parseInt(x,10) + 1;
+        db.update({id:docs[x].id},{ $set: { place: val }},{},function (err, numReplaced) {});
+    });
 });
 db.find({}).sort({date: -1}).exec(function (err, docs) {
     mapData('byDate', docs);
@@ -27,7 +32,7 @@ function mapData(container, docs) {
         run.pace = toPace(run.distance, run.time);
         run.timeString = (hours !== 0 ? hours + ":" : "") + minutes + ":" + seconds;
         run.score = docs[x].score;
-        //run.place = x;
+        run.place = docs[x].place || "-";
         runs[x] = run;
         let ctr = document.getElementById(container);
         let newRun = document.createElement('li');
@@ -42,7 +47,7 @@ function createRun(runs) {
         <span>${runs.score}</span>
         <span>${runs.distance}</span>
         <span>${runs.timeString}</span>
-        <span></span>
+        <span>#${runs.place}</span>
         <span>${runs.pace}</span>
         <span>${runs.date}</span>
     </a>`;

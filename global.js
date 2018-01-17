@@ -38,6 +38,7 @@ function refreshData(pag) {
             console.log(err);
         }
     });
+
 }
 
 function openLink(url){
