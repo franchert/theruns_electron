@@ -46,5 +46,12 @@ function openLink(url){
 
 function scorer(distance, time) {
     const pace = ((time / 60) / distance) * 60;
-    return Math.round(((400 * Math.pow(distance, 0.15)) - pace) * 100) / 100;
+    return ((Math.round(((400 * Math.pow(distance, 0.15)) - pace) * 100) / 100) + 50).toString().padStart(2,'0');;
+}
+
+function toPace(distance, time) {
+    const pace = ((time / 60) / distance) * 60;
+    const min = Math.floor(pace/60);
+    const sec = Math.floor(pace % 60);
+    return min + ":" + sec.toString().padStart(2,'0');
 }

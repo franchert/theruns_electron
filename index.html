@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <script type="text/javascript" src="./global.js"></script>
+    <link rel="stylesheet" href="./global.css">
   </head>
-  <body>
+  <div>
     <script>
       // You can also require other files to run in this process
       require('./renderer.js')
     </script>
-    <button id="refresh-button" onclick="refreshData(1)">Refresh all data</button>
-    <ul id="runContainer"></ul>
+    <div class="header">
+      <button id="refresh-button" onclick="refreshData(1)">Refresh all data</button>
+    </div>
+    <ul id="byScore"></ul>
+    <ul id="byDate"></ul>
   </body>
 </html>
