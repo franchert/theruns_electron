@@ -1,5 +1,9 @@
 body{
     margin:0;
+    background:#412851;
+}
+article{
+    max-width:500px;
 }
 .header{
     height:10vh;
@@ -7,16 +11,41 @@ body{
     float:left;
     width:100vw;
 }
-ul{
-    list-style-type:none;
-    margin:0;
-    padding:0;
+.tab-container{
     display:block;
     float:left;
-    width:50%;
+    width:100%;
     height: 90vh;
     overflow-x: hidden;
     overflow-y: auto;
+}
+.tab-header .tabs{
+    background-color:transparent;
+}
+.tab-header .tabs .tab a,
+.tab-header .tabs .tab a:hover{
+    color:rgba(255,255,255,0.4);
+}
+.tab-header .tabs .tab a.active{
+    color:rgba(255,255,255,0.4);
+}
+.tab-header .tabs .indicator{
+    background-color:#210A2F;
+    height: 4px;
+}
+.tab-container div:not(.tab-header){
+    height:calc(100% - 48px);
+    display:block;
+    float:left;
+    width:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+.tab-header{
+    display:block;
+    float:left;
+    width:100%;
+    height:48px;
 }
 .run{
     list-style:none;
@@ -28,10 +57,38 @@ ul{
     display:flex;
     align-items:center;
     flex-wrap: wrap;
+    cursor:pointer;
+    border-bottom:1px solid rgba(0,0,0,0.4);
+}
+.run a:hover{
+    background:rgba(0,0,0,0.2);
 }
 .run a span{
     display:flex;
-    flex: 1 1 33%;
+    flex: 1 1 50px;
     text-align:right;
     justify-content:flex-end;
+    color:#c1c1cc;
+}
+
+.run a .r-score{
+}
+.run a .r-distance{
+}
+.run a .r-time{
+}
+.run a .r-place{
+    flex-basis:10px;
+}
+.run a .r-pace{
+}
+.run a .r-date{
+    flex-basis:100px;
+}
+
+.run a .r-distance:after{
+    content:'mi';
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 66%;
+    padding-left: 2px;
 }

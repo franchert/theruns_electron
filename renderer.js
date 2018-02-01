@@ -14,12 +14,14 @@ db.find({}).sort({score: -1}).exec(function (err, docs) {
 db.find({}).sort({date: -1}).exec(function (err, docs) {
     mapData('byDate', docs);
 });
+db.find({}).sort({distance: -1}).exec(function (err, docs) {
+    mapData('byDistance', docs);
+});
 
 function mapData(container, docs) {
     let keys = Object.keys(docs);
     let runs = {};
     keys.map((x) => {
-        //console.log(x);
         const hours = Math.floor(docs[x].time/3600);
         let minutes = (Math.floor(docs[x].time/60) % 60);
         minutes = (minutes < 10 && hours === 0) ? minutes : minutes.toString().padStart(2,'0');
@@ -43,13 +45,13 @@ function mapData(container, docs) {
 }
 
 function createRun(runs) {
-    return `<a onclick="openLink('https://www.strava.com/activities/${runs.id}')">
-        <span>${runs.score}</span>
-        <span>${runs.distance}</span>
-        <span>${runs.timeString}</span>
-        <span>#${runs.place}</span>
-        <span>${runs.pace}</span>
-        <span>${runs.date}</span>
+    return `<a class="run-link" data-score="${runs.score}" onclick="openLink('https://www.strava.com/activities/${runs.id}')">
+        <span class="r-place">${runs.place}</span>
+        <span class="r-score">${runs.score}</span>
+        <span class="r-distance">${runs.distance}</span>
+        <span class="r-pace">${runs.pace}</span>
+        <span class="r-time">${runs.timeString}</span>
+        <span class="r-date">${runs.date}</span>
     </a>`;
 }
 

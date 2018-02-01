@@ -20,6 +20,8 @@
     "electron": "~1.7.8"
   },
   "dependencies": {
+    "jquery": "^3.3.0",
+    "materialize-css": "^0.100.2",
     "moment": "^2.20.1",
     "nedb": "^1.8.0",
     "strava-v3": "^1.14.0"

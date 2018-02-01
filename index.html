@@ -4,17 +4,31 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <script type="text/javascript" src="./global.js"></script>
+    <script src="./node_modules/materialize-css/js/hammer.min.js" onload="window.Hammer = module.exports;"></script>
+    <script type="text/javascript" src="./node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <link rel="stylesheet" href="./global.css">
+    <link rel="stylesheet" href="./node_modules/materialize-css/dist/css/materialize.min.css">
   </head>
-  <div>
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
-    <div class="header">
-      <button id="refresh-button" onclick="refreshData(1)">Refresh all data</button>
-    </div>
-    <ul id="byScore"></ul>
-    <ul id="byDate"></ul>
+  <body>
+    <article>
+      <script>
+        require('./renderer.js')
+      </script>
+      <div class="header">
+        <button id="refresh-button" onclick="refreshData(1)">Refresh all data</button>
+      </div>
+      <div class="tab-container">
+        <div class="tab-header col s12">
+          <ul class="tabs">
+            <li class="tab col s6"><a class="active" href="#best">Best</a></li>
+            <li class="tab col s6"><a href="#latest">Latest</a></li>
+            <li class="tab col s6"><a href="#furthest">Furthest</a></li>
+          </ul>
+        </div>
+        <div id="best" class="col s12"><ul id="byScore"></ul></div>
+        <div id="latest" class="col s12"><ul id="byDate"></ul></div>
+        <div id="furthest" class="col s12"><ul id="byDistance"></ul></div>
+      </div>
+    </article>
   </body>
 </html>
